@@ -8,6 +8,13 @@ class nodejs::params {
       $nodenv_user = $::boxen_user
       $nodenv_root = "${boxen::config::home}/nodenv"
     }
+    
+    Debian: {
+      include boxen::config
+
+      $nodenv_user = $::boxen_user
+      $nodenv_root = "${boxen::config::home}/nodenv"
+    }
 
     default: {
       $nodenv_user = 'root'
@@ -21,6 +28,7 @@ class nodejs::params {
 
   $nvm_root = $::osfamily ? {
     'Darwin' => "${boxen::config::home}/nvm",
+    'Debian' => "${boxen::config::home}/nvm",
     default  => '/usr/local/share/nvm'
   }
 }

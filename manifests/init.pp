@@ -14,7 +14,7 @@ class nodejs(
   require nodejs::nvm
   include nodejs::rehash
 
-  if $::osfamily == 'Darwin' {
+  if ($::osfamily == 'Darwin' or $::osfamily == 'Debian') {
     include boxen::config
 
     file { "${boxen::config::envdir}/nodenv.sh":

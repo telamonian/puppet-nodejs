@@ -4,7 +4,7 @@
 class nodejs::nvm {
   include nodejs
 
-  if $::osfamily == 'Darwin' {
+  if ($::osfamily == 'Darwin' or $::osfamily == 'Debian') {
     include boxen::config
 
     file { "${boxen::config::envdir}/nvm.sh":
