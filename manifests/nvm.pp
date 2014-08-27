@@ -3,13 +3,10 @@
 #
 class nodejs::nvm {
   include nodejs
+  include boxen::config
 
-  if ($::osfamily == 'Darwin' or $::osfamily == 'Debian') {
-    include boxen::config
-
-    file { "${boxen::config::envdir}/nvm.sh":
-      ensure => absent
-    }
+  file { "${boxen::config::envdir}/nvm.sh":
+    ensure => absent
   }
 
   exec { 'purge nvm':

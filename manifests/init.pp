@@ -14,17 +14,15 @@ class nodejs(
   require nodejs::nvm
   include nodejs::rehash
 
-  if ($::osfamily == 'Darwin' or $::osfamily == 'Debian') {
-    include boxen::config
+  include boxen::config
 
-    file { "${boxen::config::envdir}/nodenv.sh":
-      ensure => absent,
-    }
+  file { "${boxen::config::envdir}/nodenv.sh":
+    ensure => absent,
+  }
 
-    boxen::env_script { 'nodejs':
-      priority => 'higher',
-      source   => 'puppet:///modules/nodejs/nodenv.sh',
-    }
+  boxen::env_script { 'nodejs':
+    priority => 'higher',
+    source   => 'puppet:///modules/nodejs/nodenv.sh',
   }
 
   repository { $nodenv_root:
